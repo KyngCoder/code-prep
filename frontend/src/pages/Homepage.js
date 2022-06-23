@@ -6,9 +6,11 @@ import {
   Image,
   Heading,
 } from "@chakra-ui/react";
+import {Link} from 'react-router-dom'
 import React from "react";
 import background from "../assets/background.jpg";
 import showcase from "../assets/showcase.jpg";
+import showcase2 from '../assets/show3.png'
 
 const Homepage = () => {
   return (
@@ -16,20 +18,20 @@ const Homepage = () => {
       <div className="absolute  text-white right-4 p-4">
         <Breadcrumb>
           <BreadcrumbItem>
-            <BreadcrumbLink href="#">Home</BreadcrumbLink>
+          <Link to="/">Home</Link>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href="#">Docs</BreadcrumbLink>
+            <Link to="/quiz">Quiz</Link>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href="#">Breadcrumb</BreadcrumbLink>
+            <BreadcrumbLink >Breadcrumb</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
       </div>
       <div>
-        <img className="object-fill h-full w-full" src={showcase} />
+        <img className="img" src={showcase} />
       </div>
 
       <div className="absolute top-20  md:top-2/5 sm:top-1/4 left-1/2  text-white text-2xl">
