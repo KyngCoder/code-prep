@@ -1,15 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+  Box,
+  ButtonGroup,
+  Button,
+  Image,
+  Avatar,
+  WrapItem,
+} from "@chakra-ui/react";
+
 const Navbar = () => {
+  const initialFocusRef = React.useRef();
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <Link to="/"  className="flex items-center">
-          <img
-            src=""
-            className="mr-3 h-6 sm:h-9"
-          />
+        <Link to="/" className="flex items-center">
+          <img src="" className="mr-3 h-6 sm:h-9" />
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             Code Prep
           </span>
@@ -19,11 +35,30 @@ const Navbar = () => {
             type="button"
             className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
           >
-            <span className="sr-only">Open user menu</span>
-            <img
-              className="w-8 h-8 rounded-full"
-              src=""
-            />
+            <div>
+              <Popover
+                initialFocusRef={initialFocusRef}
+                placement="bottom"
+                closeOnBlur={false}
+              >
+                <PopoverTrigger>
+                  <WrapItem color="white">
+                    <Avatar size="sm" name="Ricardo Merchant" src="" />
+                  </WrapItem>
+                </PopoverTrigger>
+                <PopoverContent mr={8} px={6} color="blue" bg="white" borderColor="white">
+                  <PopoverHeader py={4} fontWeight="bold" border="0">
+                    Manage Your Account
+                  </PopoverHeader>
+                  <PopoverArrow />
+                  <PopoverBody color="white">
+                    <Button bg="red" m={4} p="4" borderRadius="4">
+                      Log out
+                    </Button>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </div>
           </button>
           {/* drop down menu */}
           <div
@@ -34,11 +69,11 @@ const Navbar = () => {
             data-popper-placement="top"
           >
             <div className="py-3 px-4">
-              <span className="block text-sm text-gray-900 dark:text-white">
+              <span className="block text-sm text-white dark:text-white">
                 Bonnie Green
               </span>
               <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-        kjkjkl
+                kjkjkl
               </span>
             </div>
             <ul className="py-1" aria-labelledby="dropdown">
