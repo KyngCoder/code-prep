@@ -13,11 +13,12 @@ const getQuizzes = async (req, res) => {
 const createQuiz = async (req, res) => {
   const quiz = req.body;
  const {question} = req.body
+ const {title} = req.body
  
  
 
   try {
-    const quizExists = await Quizzes.findOne({ question });
+    const quizExists = await Quizzes.findOne({ $and:[{question},{title}] });
 
     if (quizExists) {
      return res.status(400).json({msg:"quiz already exist"})
@@ -45,10 +46,12 @@ const deleteQuiz = async (req, res) => {
 };
 
 const getQuizzesBySearch = async (req, res) => {
-  const searchTerm = req.query.title;
+  const {title,level} = req.query;
+
+ 
 
   try {
-    const quizs = await Quizzes.find({ title: searchTerm });
+    const quizs = await Quizzes.find({$and:[{title,level}]});
     res.status(200).json({ data: quizs });
   } catch (error) {
     res.status(404).json({ message: error.message });
