@@ -16,17 +16,22 @@ import python from "../assets/python.png";
 import react from "../assets/react.png";
 import { Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../context/context";
 
 const QuizBox = () => {
+  const {quizName,setQuizName} = useContext(AppContext)
+  console.log(quizName)
+
   return (
     <>
       <Link to="/start" className="bg-white rounded-md shadow-md hover cursor-pointer">
         <Text pt={30}>React.JS</Text>
-        <Image m={0} p={0} src={react} alt="react" />
+        <Image m={0} p={0} src={react} alt="react" onClick={()=>setQuizName('react')} />
       </Link>
-      <Link to="/start" className="bg-white rounded-md shadow-md hover cursor-pointer ">
+      <Link to="/start" className="bg-white rounded-md shadow-md hover cursor-pointer " onClick={()=>setQuizName('Javascript')}>
         <Text pt={30}>Javascript</Text>
-        <Image m={0} p={0} src={javascript} alt="react" />
+        <Image m={0} p={0} src={javascript} alt="react"  />
       </Link>
       <Link to="/start" className="bg-white rounded-md shadow-md hover cursor-pointer ">
         <Text pt={30}>Node.JS</Text>

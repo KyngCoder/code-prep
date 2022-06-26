@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { AppContext } from "../context/context";
 
 const Questions = () => {
+
+  const {quizName,level} = useContext(AppContext)
+  console.log(quizName)
+  console.log(level)
+
   const [questions, setQuestions] = useState([]);
   const [questNum,setQuestionsNum] = useState(0)
 
+  
+
   const getQuestions = async () => {
     await axios
-      .get("http://localhost:5000/quiz/search?title=Python&level=easy")
+      .get(`http://localhost:5000/quiz/search?title=${quizName}&level=${level}`)
       .then((res) => setQuestions(res.data.data));
   };
 
@@ -22,7 +31,10 @@ const Questions = () => {
       <div className="m-4 text-3xl">
         <h1>Code Prep</h1>
       </div>
-      <div className="shadow-lg rounded-md w-4/5 md:w-1/2">
+      {
+        questions.length?(
+          <>
+          <div className="shadow-lg rounded-md w-4/5 md:w-1/2">
         <div className="bg-green-500 rounded text-center py-2 ">
           <p>JavaScript Easy</p>
         </div>
@@ -33,19 +45,19 @@ const Questions = () => {
           <div>
             <div className="flex py-2 ">
               <input type="radio" name="quest" />
-              <p className="pl-2">{questions[questNum].A}</p>
+              <p className="pl-2">{questions[questNum]?.A}</p>
             </div>
             <div className="flex py-2 ">
               <input type="radio" name="quest" />
-              <p className="pl-2">{questions[questNum].B}</p>
+              <p className="pl-2">{questions[questNum]?.B}</p>
             </div>
             <div className="flex py-2 ">
               <input type="radio" name="quest" />
-              <p className="pl-2">{questions[questNum].C}</p>
+              <p className="pl-2">{questions[questNum]?.C}</p>
             </div>
             <div className="flex py-2 ">
               <input type="radio" name="quest" />
-              <p className="pl-2">{questions[questNum].D}</p>
+              <p className="pl-2">{questions[questNum]?.D}</p>
             </div>
           </div>
         </div>
@@ -59,11 +71,19 @@ const Questions = () => {
         {/* implement length tracker */}
         <div className="flex justify-between">
           <p>
-            10/<sub>20</sub>
+            {questNum + 1}/<sub>{questions.length}</sub>
           </p>
           <button>Next</button>
         </div>
       </div>
+      </>
+        ):
+        (
+          <div>
+          <p>No questions,Coming soon</p>
+          </div>
+        )
+      }
     </div>
   );
 };

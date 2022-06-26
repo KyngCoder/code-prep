@@ -1,8 +1,10 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router'
+import { AppContext } from '../context/context'
 
 const StartQuiz = () => {
+  const {quizName} = useContext(AppContext)
   const navigate = useNavigate()
   return (
     <div className="bg-gray-300 h-screen flex items-center justify-center">
